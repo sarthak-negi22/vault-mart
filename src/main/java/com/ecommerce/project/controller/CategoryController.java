@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+// @RequestMapping("/api")      one of the use case of this annotation is to specify that all handles defined here, begins with this route, hence no need to write it again and again below.
+
 public class CategoryController {
 
 //    @Autowired - without constructor injection, this would also work the same
@@ -24,6 +26,7 @@ public class CategoryController {
     }
 
     @GetMapping("/api/public/categories")
+//  @RequestMapping(value = "/api/public/categories", method = RequestMethod.GET) this is equivalent to above annotation, another use case of this annotation.
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
