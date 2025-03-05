@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service            // tells spring that it needs to manage this class as a bean
 public class CategoryServiceImplementation implements CategoryService {
 //    private List<Category> categories = new ArrayList<>();
-    private Long nextId = 1L;       // L specifies that its a long literal, not to be confused with int
+//    private Long nextId = 1L;       // L specifies that its a long literal, not to be confused with int
 
     @Autowired      // Tells spring  to automatically inject instance of this type, automatically searches  for a bean of the type CategoryRepository and assigns it to the object
     private CategoryRepository categoryRepository;
@@ -26,7 +26,7 @@ public class CategoryServiceImplementation implements CategoryService {
 
     @Override
     public void createCategory(Category category) {
-        category.setCategoryId(nextId++);
+//        category.setCategoryId(nextId++);
         categoryRepository.save(category);
     }
 
