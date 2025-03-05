@@ -27,6 +27,8 @@ public class Category {
         this.categoryId = categoryId;
     }
 
+//    for every data member, getter and setters must be present then only we can see the values reflected in the DB.
+//    If getter and setter are not provided, null is stored in the values of the attributes.
     public String getCategoryName() {
         return categoryName;
     }
