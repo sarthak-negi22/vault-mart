@@ -1,8 +1,14 @@
 package com.ecommerce.project.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "categories")     // an entity in JPA means, a table in DB. This particular class will be mapped to a table in DB by spring, and the table will contain attributes of the class members. The name of the entity is "categories"
+@Data   // makes every field as final, generates setters and getters, no-args constructor
+@NoArgsConstructor      // generates a default constructor, assigns default values to the final fields
+@AllArgsConstructor     // generates a parameterized constructor will all fields as parameters
 public class Category {
 
     // means this attribute will be the primary key of the table
@@ -19,31 +25,31 @@ public class Category {
     private Long categoryId;
     private String categoryName;
 
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
+//    public Long getCategoryId() {
+//        return categoryId;
+//    }
+//
+//    public void setCategoryId(Long categoryId) {
+//        this.categoryId = categoryId;
+//    }
 
 //    for every data member, getter and setters must be present then only we can see the values reflected in the DB.
 //    If getter and setter are not provided, null is stored in the values of the attributes.
-    public String getCategoryName() {
-        return categoryName;
-    }
+//    public String getCategoryName() {
+//        return categoryName;
+//    }
+//
+//    public void setCategoryName(String categoryName) {
+//        this.categoryName = categoryName;
+//    }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Category(Long categoryId, String categoryName) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-    }
+//    public Category(Long categoryId, String categoryName) {
+//        this.categoryId = categoryId;
+//        this.categoryName = categoryName;
+//    }
 
 //    good practice to have a default constructor in JPA
-    public Category() {
-
-    }
+//    public Category() {
+//
+//    }
 }
