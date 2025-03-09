@@ -34,7 +34,9 @@ public class CategoryController {
     }
 
     @PostMapping("/api/public/categories")
-    public ResponseEntity<String> createCategory(@RequestBody Category category) {
+    public ResponseEntity<String> createCategory(@Valid  @RequestBody Category category) {     // @Valid is used to validate method parameters, used in only RequestBody, returns a 400 Bad Request by default.
+//        @Valid throws MethodArgumentNotValidException by default, if validation fails.
+//        If request is valid as per the model defined, then only it allows the request to controller, else it does not allow the request to controller
         categoryService.createCategory(category);
         return new ResponseEntity<>("Category Added successfully!", HttpStatus.CREATED);
     }
