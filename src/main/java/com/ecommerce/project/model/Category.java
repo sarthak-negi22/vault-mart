@@ -1,6 +1,7 @@
 package com.ecommerce.project.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,8 @@ public class Category {
 //    @GeneratedValue(strategy = GenerationType.TABLE, generator = 'table_gen')
 //    @TableGenerator(name = 'table_gen', table = 'id_gen', pkColumnName = 'gen_key', valueColumnName = 'gen_value', pkColumnValue = 'task_id', allocationSize = 1)
     private Long categoryId;
+
+    @NotBlank(message = "Category name can NOT be blank!")       // ensures that a string is not null, not empty, and does not contain only whitespace
     private String categoryName;
 
 //    public Long getCategoryId() {
