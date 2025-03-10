@@ -2,6 +2,7 @@ package com.ecommerce.project.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,8 @@ public class Category {
 //    @TableGenerator(name = 'table_gen', table = 'id_gen', pkColumnName = 'gen_key', valueColumnName = 'gen_value', pkColumnValue = 'task_id', allocationSize = 1)
     private Long categoryId;
 
-    @NotBlank(message = "Category name can NOT be blank!")       // ensures that a string is not null, not empty, and does not contain only whitespace
+    @NotBlank(message = "Category name can NOT be blank!")       // ensures that a string is not null, not empty, and does not contain only whitespace. If 'message' attribute is not specified, that the default message is shown.
+    @Size(min = 5, message = "Category name MUST contain at least 5 characters")        // ensures that a string, collection or an array has a specified range
     private String categoryName;
 
 //    public Long getCategoryId() {
