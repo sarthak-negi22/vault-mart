@@ -28,6 +28,12 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @GetMapping("/api/echo")
+//    RequestParam allows you to extract the parameters from URL. Can pass "name", "defaultValue", "required" attributes to that annotation
+    public ResponseEntity<String> echoMessage(@RequestParam(name = "message", required = false)  String message) {
+        return new ResponseEntity<>("Echoed message : " + message, HttpStatus.OK);
+    }
+
     @GetMapping("/api/public/categories")
 //  @RequestMapping(value = "/api/public/categories", method = RequestMethod.GET) this is equivalent to above annotation, another use case of this annotation.
     public ResponseEntity<CategoryResponse> getAllCategories() {

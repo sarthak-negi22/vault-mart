@@ -33,6 +33,8 @@ public class CategoryServiceImplementation implements CategoryService {
     @Override
     public CategoryResponse getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
+
+//        checking if no category is being created or not
         if(categories.isEmpty())
             throw new APIException("No category created till now!");
 
@@ -48,19 +50,24 @@ public class CategoryServiceImplementation implements CategoryService {
     @Override
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
         Category category = modelMapper.map(categoryDTO, Category.class);
+
+//        checking if same category name exists already or not
         Category categoryFromDb = categoryRepository.findByCategoryName(category.getCategoryName());
         if(categoryFromDb != null)
             throw new APIException("Category with the name "+category.getCategoryName()+" already exists!");
-//        category.setCategoryId(nextId++);
+
+//        saving the category to DB
         Category savedCategory = categoryRepository.save(category);
         return modelMapper.map(savedCategory, CategoryDTO.class);
     }
 
     @Override
     public CategoryDTO deleteCategory(Long categoryId) {
+//        return custom "not found" status if category with that id doesnt exist
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "CategoryId", categoryId));
 
+//        deleting the category if exists, and then returning the deleted category in the form of DTO
         categoryRepository.delete(category);
         return modelMapper.map(category, CategoryDTO.class);
     }
@@ -68,10 +75,12 @@ public class CategoryServiceImplementation implements CategoryService {
     @Override
     public CategoryDTO updateCategory(CategoryDTO categoryDTO, Long categoryId) {
         Category savedCategory = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new ResourceNotFoundException("Category", "CategoryId", categoryId));       // if category doesnt exist, throw an exception
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "CategoryId", categoryId));       // if category doesnt exist, throw a custom status of "not found"
 
+//        getting the category from its DTO then assigning the id provided by the user, to the object.
         Category category = modelMapper.map(categoryDTO, Category.class);
         category.setCategoryId(categoryId);
+//        updating the changes in DB and returning its DTO.
         savedCategory = categoryRepository.save(category);
         return modelMapper.map(savedCategory, CategoryDTO.class);
 
