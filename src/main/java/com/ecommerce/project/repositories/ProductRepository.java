@@ -10,4 +10,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByCategoryOrderByPriceAsc(Category category);     // just by declaring this particular method, JPA is going to return the implementation of it, just by seein the method name accordingly
+
+    List<Product> findByProductNameLikeIgnoreCase(String keyword);
+    // like stands for pattern matching here
 }
