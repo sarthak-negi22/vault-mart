@@ -9,15 +9,12 @@ import com.ecommerce.project.repositories.CategoryRepository;
 import com.ecommerce.project.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ProductServiceImplementation implements  ProductService {
@@ -33,6 +30,9 @@ public class ProductServiceImplementation implements  ProductService {
 
     @Autowired
     private FileService fileService;
+
+    @Value("${project.image}")      // used to bind the values from application.properties, to inject values into fields
+    private String path;
 
     @Override
     public ProductDTO addProduct(Long categoryId, ProductDTO productDTO) {
@@ -129,7 +129,6 @@ public class ProductServiceImplementation implements  ProductService {
 
 //      upload image to server
 //      get the file name of the uploaded image
-        String path = "images/";
         String fileName = fileService.uploadImage(path, image);
 
 //      updating the new file name to the product
@@ -141,8 +140,4 @@ public class ProductServiceImplementation implements  ProductService {
 //      return DTO after mapping product to DTO
         return modelMapper.map(updatedProduct, ProductDTO.class);
     }
-
-
-
-
 }
