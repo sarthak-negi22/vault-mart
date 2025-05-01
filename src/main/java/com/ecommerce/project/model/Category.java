@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity(name = "categories")     // an entity in JPA means, a table in DB. This particular class will be mapped to a table in DB by spring, and the table will contain attributes of the class members. The name of the entity is "categories"
 @Data   // makes every field as final, generates setters and getters, no-args constructor
 @NoArgsConstructor      // generates a default constructor, assigns default values to the final fields
@@ -29,6 +31,9 @@ public class Category {
     @NotBlank(message = "Category name can NOT be blank!")       // ensures that a string is not null, not empty, and does not contain only whitespace. If 'message' attribute is not specified, that the default message is shown.
     @Size(min = 5, message = "Category name MUST contain at least 5 characters")        // ensures that a string, collection or an array has a specified range
     private String categoryName;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Product> products;
 
 //    public Long getCategoryId() {
 //        return categoryId;
