@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,7 @@ public class Address {
     private String pincode;
 
     @ManyToMany(mappedBy = "addresses")
+    @ToString.Exclude       // this field won't be displayed in toString() method of this class
     private List<User> users = new ArrayList<>();
 
     public Address(String street, String buildingName, String city, String state, String country, String pincode) {
