@@ -55,4 +55,7 @@ public class User {
                joinColumns = @JoinColumn(name = "user_id"),
                inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)     // if a user is deleted, then all of its associated products will be deleted too. Its different from CascadeType.DELETE.
+    private Set<Product> products;
 }
